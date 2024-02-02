@@ -1,0 +1,24 @@
+Sub ir_para_ultima_aba()
+    'esse código é útil para planilhas que possuem várias abas e que precisa consolidar tudo em um arquivo sempre que uma nova aba é adicionada
+    Sheets(Sheets.Count).Activate
+    Range("A1").Select
+    Range(Selection, Selection.End(xlToRight)).Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Copy
+
+    Sheets("Planilha1").Activate
+    
+    Range("A2:E2").Select
+    Range(Selection, Selection.End(xlToRight)).Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+    Dim Ultima_Linha As Long
+    Ultima_Linha = Cells(Rows.Count, 1).End(xlUp).Row + 1
+    Cells(Ultima_Linha, 1).Select
+    ActiveSheet.Paste
+
+    ActiveWorkbook.Save
+
+   MsgBox "Arquivo Atualizado!", vbInformation, ":)"
+
+End Sub
